@@ -17,7 +17,7 @@ services:
         target: /docker-entrypoint-initdb.d/init.sql
 
   app-server:
-    image: 827784331229.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/phonebook-app:latest"
+    image: 827784331229.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/phonebook-app:latest
     deploy:
       mode: global
       update_config:
