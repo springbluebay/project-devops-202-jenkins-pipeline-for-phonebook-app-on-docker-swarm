@@ -13,7 +13,7 @@ pipeline {
         CFN_TEMPLATE="phonebook-docker-swarm-cfn-template.yml"
         CFN_KEYPAIR="blueman"
         HOME_FOLDER = "/home/ec2-user"
-        GIT_FOLDER = sh(script:'echo ${GIT_URL} | sed "s/.*\\///;s/.git$//"', returnStdout:true).trim()
+        GIT_FOLDER = "project-devops-202-jenkins-pipeline-for-phonebook-app-on-docker-swarm"
 
 
     }
@@ -95,7 +95,7 @@ pipeline {
                 echo 'Cloning and Deploying App on Swarm using Grand Master with Instance Id: $MASTER_INSTANCE_ID'
                 sh 'mssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no --region ${AWS_REGION} ${MASTER_INSTANCE_ID} git clone ${GIT_URL}'
                 sleep(10)
-                sh 'mssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no --region ${AWS_REGION} ${MASTER_INSTANCE_ID} docker stack deploy --with-registry-auth -c ${HOME_FOLDER}/${GIT_FOLDER}docker-compose.yml ${APP_NAME}'
+                sh 'mssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no --region ${AWS_REGION} ${MASTER_INSTANCE_ID} docker stack deploy --with-registry-auth -c ${HOME_FOLDER}/${GIT_FOLDER}/docker-compose.yml ${APP_NAME}'
 
             }
         }
